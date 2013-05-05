@@ -1,0 +1,25 @@
+script type="text/javascript" src="/assets/lib/mediaelement-and-player.min.js"
+
+audio controls="control" type="audio/mp3" src="/musics"
+
+.playlist
+
+coffee:
+  audio_player = $('video, audio').mediaelementplayer()[0]
+
+  window.music_player =
+    playlist: []
+    playlist_index: null
+    play: () =>
+      return false if music_player.playlist_index == null
+      console.log "/musics#{music_player.playlist[music_player.playlist_index].id}/download"
+      audio_player.setSrc("/musics/#{music_player.playlist[music_player.playlist_index].id}/download")
+      audio_player.play()
+    addMusicsToPlaylist: (musics) ->
+      console.log(musics);
+      music_player.playlist = music_player.playlist.concat(musics)
+      if music_player.playlist_index == null
+        music_player.playlist_index = 0
+
+  music_player.play()
+

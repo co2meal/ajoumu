@@ -5,6 +5,16 @@ AjouMu::Application.routes.draw do
 
   root :to => 'home#index'
 
+  resources :musics do
+    post 'upload', :on => :collection
+    get 'download'
+  end
+
+  get 'search' => 'search#index'
+  get 'music_player' => 'play#music_player'
+
+  # get '/uploads/music/file/:id/:basename.:extension', :controller => :musics, :action => :download
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

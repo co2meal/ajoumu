@@ -1,0 +1,39 @@
+= form_tag "/search", :method => 'get', :class => "form-inline" do
+  legend Search musics
+  = label_tag(:keyword, "Search for: ")
+  = text_field_tag(:keyword, @keyword)
+  = submit_tag("Search", :class => :btn)
+
+- if @musics.present?
+  table.music-table.searched_musics.table
+    thead
+      tr
+        th
+        th id
+        th name
+        th artist
+    tbody
+      - @musics.each do |music|
+        tr
+          td = check_box_tag(:selected_musics, music.id, false, :data => {:music => music.to_json})
+          td = music.id
+          td = music.name
+          td = music.artist
+
+  button.btn.add-musics-to-playlist Add musics to playlist
+
+
+javascript:
+  window.music_player_window = window.music_player_window || window.open("music_player", "music_player");
+  $('button.add-musics-to-playlist').bind('click', function() {
+
+    $(music_player_window.document).ready(function() {
+      console.log(window.test = music_player_window);
+      music_player_window.music_player.addMusicsToPlaylist($('[name=selected_musics]').map(function(i, r){return $(r).data('music');}).toArray());
+      music_player_window.music_player.play();
+      }
+    );
+
+
+
+  });

@@ -1,0 +1,13 @@
+p
+  - if user_signed_in?
+    = link_to "Sign out", :destroy_user_session, :method => :delete
+  - else
+    = link_to "Sign in", :new_user_session
+
+p
+  = link_to "Upload a music", new_music_path
+
+p
+  = link_to "Search music", search_path
+
+| zzzz

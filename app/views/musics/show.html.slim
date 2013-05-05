@@ -1,0 +1,7 @@
+script type="text/javascript" src="/assets/lib/mediaelement-and-player.min.js"
+
+audio controls="control" type=@music.content_type src=music_download_path(@music)
+
+coffee:
+  window.player = $('video, audio').mediaelementplayer()[0]
+
