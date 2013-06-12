@@ -1,6 +1,24 @@
 AjouMu
 ======
 
+설치방법
+
+설치할 프로그램
+
+rails: http://rubyonrails.org/download
+git: http://www.git-scm.com/
+
+`git clone https://github.com/co2meal/ajoumu.git`
+`cd ajoumu`
+`bundle install`
+`rake db:migrate`
+`rails server`
+
+하면 됩니다.
+
+
+
+
 소분설!
 
 사용할 프레임워크: Ruby on Rails
