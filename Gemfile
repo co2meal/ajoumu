@@ -42,3 +42,7 @@ gem 'thin'
 gem 'devise'
 gem "slim-rails"
 gem 'carrierwave'
+
+gem 'stripe'
+gem 'activeadmin'
+

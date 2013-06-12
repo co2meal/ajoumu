@@ -21,6 +21,8 @@
           td = music.artist
 
   button.btn.add-musics-to-playlist Add musics to playlist
+  br
+  = link_to "Back to main page", root_path
 
 
 javascript:
@@ -29,8 +31,7 @@ javascript:
 
     $(music_player_window.document).ready(function() {
       console.log(window.test = music_player_window);
-      music_player_window.music_player.addMusicsToPlaylist($('[name=selected_musics]').map(function(i, r){return $(r).data('music');}).toArray());
-      music_player_window.music_player.play();
+      music_player_window.music_player.addMusicsToPlaylist($('[name=selected_musics]:checked').map(function(i, r){return $(r).data('music');}).toArray());
       }
     );
 

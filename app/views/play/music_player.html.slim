@@ -1,25 +1,60 @@
 script type="text/javascript" src="/assets/lib/mediaelement-and-player.min.js"
 
-audio controls="control" type="audio/mp3" src="/musics"
-
-.playlist
+#music-player
+  audio controls="control" type="audio/mp3" src="/musics"
+  ol.playlist
 
 coffee:
   audio_player = $('video, audio').mediaelementplayer()[0]
 
+  # bind events
+
+  # play next song
+  $(audio_player).on 'ended', ->
+    index = music_player.playlist_index + 1
+    music_player.changeIndex(index)
+
+  # change music
+  $('#music-player .playlist').delegate 'li', 'click', () ->
+    index = $(this).parent().children().index(this)
+    music_player.changeIndex(index)
+
+
+  # create music_player
   window.music_player =
     playlist: []
     playlist_index: null
     play: () =>
-      return false if music_player.playlist_index == null
-      console.log "/musics#{music_player.playlist[music_player.playlist_index].id}/download"
+      return false unless music_player.playlist_index?
       audio_player.setSrc("/musics/#{music_player.playlist[music_player.playlist_index].id}/download")
+      console.log audio_player
       audio_player.play()
     addMusicsToPlaylist: (musics) ->
-      console.log(musics);
+      console.log musics
+      return false if musics.length == 0
       music_player.playlist = music_player.playlist.concat(musics)
-      if music_player.playlist_index == null
+      unless music_player.playlist_index?
         music_player.playlist_index = 0
+
+      music_player.refreshPlaylist()
+      console.log audio_player.paused
+      music_player.play() if audio_player.paused
+
+    changeIndex: (index) ->
+      if index < 0 || index >= music_player.playlist.length
+        music_player.playlist_index = null
+      else
+        music_player.playlist_index = index
+
+      audio_player.load()
+      music_player.play()
+
+    refreshPlaylist: () ->
+      $playlist = $('.playlist')
+      $playlist.empty()
+      music_player.playlist.forEach (mi) ->
+        $('<li />').html(mi.name).appendTo($playlist)
 
   music_player.play()
 
+  window.audio_player = audio_player

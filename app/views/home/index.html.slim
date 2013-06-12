@@ -1,3 +1,7 @@
+- if user_signed_in?
+  p You are #{current_user.category}.
+  p You have #{current_user.credit} credits.
+
 p
   - if user_signed_in?
     = link_to "Sign out", :destroy_user_session, :method => :delete
@@ -10,4 +14,5 @@ p
 p
   = link_to "Search music", search_path
 
-| zzzz
+- if current_user and current_user.is_user?
+  = link_to "Go to payment", new_payment_history_path

@@ -1,8 +1,10 @@
 class SearchController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @keyword = params[:keyword]
     if @keyword.present?
-      @musics = Music.where("name like ? or artist like ?", "%" + params[:keyword] + "%", "%" + params[:keyword] + "%")
+      @musics = current_user.visible_musics.where("name like ? or artist like ?", "%" + params[:keyword] + "%", "%" + params[:keyword] + "%")
     end
   end
 end

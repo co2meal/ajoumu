@@ -1,0 +1,31 @@
+#stripe_error
+  noscript Javascript is not abled and is required for this form. First enable it in your web browser settings.
+
+- if @payment_history.errors.any?
+  - @payment_history.errors.full_messages.each do |message|
+    p = message
+
+
+
+= form_for @payment_history do |p|
+  = p.hidden_field :stripe_card_token
+  .field
+    = p.label :amount
+    = p.text_field :amount
+  .credit_card_form
+    h3.title
+      Enter Credit Card
+    - if @payment_history.stripe_card_token.present?
+      Credit card has been provided.
+    - else
+      .field
+        = label_tag :card_number, "Credit Card Number"
+        = text_field_tag :card_number, nil, name: nil
+      .field
+        = label_tag :card_code, "Security Code (CVV)"
+        = text_field_tag :card_code, nil, name: nil
+      .field
+        = label_tag :card_month, "Expiry Date"
+        = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+        = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} 
+  = p.submit

@@ -1,13 +1,20 @@
 AjouMu::Application.routes.draw do
+  root :to => 'home#index'
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   get "home/index"
 
   devise_for :users
-
-  root :to => 'home#index'
+  ActiveAdmin.routes(self)
 
   resources :musics do
     post 'upload', :on => :collection
     get 'download'
+  end
+
+  resources :payment_histories, :path => 'payment' do
   end
 
   get 'search' => 'search#index'
