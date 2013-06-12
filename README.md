@@ -5,7 +5,7 @@ AjouMu
 
 설치할 프로그램
 
-rails: http://rubyonrails.org/download
+rails 버전 3: http://rubyonrails.org/download
 git: http://www.git-scm.com/
 
 `git clone https://github.com/co2meal/ajoumu.git`
@@ -14,7 +14,9 @@ git: http://www.git-scm.com/
 `rake db:migrate`
 `rails server`
 
+
 하면 됩니다.
+브라우저에서 http://localhost:3000하면 끝.
 
 
 
